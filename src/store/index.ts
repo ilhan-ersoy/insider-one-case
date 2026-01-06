@@ -1,5 +1,5 @@
-import { createStore } from 'vuex'
-import type { RaceState, Horse, Round, RaceResult, HorseInRound } from '@/types'
+import { createStore, type ActionContext } from 'vuex'
+import type { RaceState, Horse, Round, RaceResult, HorseInRound, RaceProgram } from '@/types'
 
 const HORSE_COLORS = [
   '#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8',
@@ -9,13 +9,13 @@ const HORSE_COLORS = [
 ]
 
 const HORSE_NAMES = [
-  'Gürbatur', 'Şahbatur', 'Storm', 'Blaze', 'Shadow',
-  'Spirit', 'Champion', 'Victory', 'Glory', 'Warrior',
-  'Phoenix', 'Titan', 'Atlas', 'Zeus', 'Apollo',
-  'Hercules', 'Neptune', 'Mercury', 'Jupiter', 'Mars'
+  'Gürbatur', 'Şahbatur', 'Yıldırım', 'Alev', 'Gölge',
+  'Rüzgar', 'Şampiyon', 'Zafer', 'Şan', 'Savaşçı',
+  'Anka', 'Kaplan', 'Aslan', 'Şahin', 'Kartal',
+  'Yiğit', 'Cesur', 'Hızır', 'Kral', 'Arslan'
 ]
 
-const ROUND_DISTANCES = [1200, 1400, 1600, 1800, 2000, 2200]
+const ROUND_DISTANCES: number[] = [1200, 1400, 1600, 1800, 2000, 2200]
 
 export const store = createStore<RaceState>({
   state: {
@@ -27,57 +27,57 @@ export const store = createStore<RaceState>({
   },
 
   getters: {
-    getAllHorses: (state) => state.allHorses,
+    getAllHorses: (state: RaceState) => state.allHorses,
 
-    getRaceProgram: (state) => state.program,
+    getRaceProgram: (state: RaceState) => state.program,
 
-    getCurrentRound: (state) => {
+    getCurrentRound: (state: RaceState) => {
       if (!state.program || state.currentRoundIndex >= state.program.rounds.length) {
         return null
       }
       return state.program.rounds[state.currentRoundIndex]
     },
 
-    getCompletedRounds: (state) => state.completedRounds,
+    getCompletedRounds: (state: RaceState) => state.completedRounds,
 
-    isRacing: (state) => state.isRacing,
+    isRacing: (state: RaceState) => state.isRacing,
 
-    getCurrentRoundIndex: (state) => state.currentRoundIndex
+    getCurrentRoundIndex: (state: RaceState) => state.currentRoundIndex
   },
 
   mutations: {
-    SET_HORSES(state, horses: Horse[]) {
+    SET_HORSES(state: RaceState, horses: Horse[]) {
       state.allHorses = horses
     },
 
-    SET_PROGRAM(state, program) {
+    SET_PROGRAM(state: RaceState, program: RaceProgram) {
       state.program = program
       state.currentRoundIndex = 0
       state.completedRounds = []
     },
 
-    SET_CURRENT_ROUND_INDEX(state, index: number) {
+    SET_CURRENT_ROUND_INDEX(state: RaceState, index: number) {
       state.currentRoundIndex = index
     },
 
-    SET_IS_RACING(state, isRacing: boolean) {
+    SET_IS_RACING(state: RaceState, isRacing: boolean) {
       state.isRacing = isRacing
     },
 
-    SET_ROUND_STATUS(state, { roundIndex, status }: { roundIndex: number; status: string }) {
+    SET_ROUND_STATUS(state: RaceState, { roundIndex, status }: { roundIndex: number; status: string }) {
       if (state.program && state.program.rounds[roundIndex]) {
         state.program.rounds[roundIndex].status = status as 'pending' | 'running' | 'completed'
       }
     },
 
-    SET_ROUND_RESULTS(state, { roundIndex, results }: { roundIndex: number; results: RaceResult[] }) {
+    SET_ROUND_RESULTS(state: RaceState, { roundIndex, results }: { roundIndex: number; results: RaceResult[] }) {
       if (state.program && state.program.rounds[roundIndex]) {
         state.program.rounds[roundIndex].results = results
         state.completedRounds.push(state.program.rounds[roundIndex])
       }
     },
 
-    RESET_RACE(state) {
+    RESET_RACE(state: RaceState) {
       state.program = null
       state.currentRoundIndex = 0
       state.isRacing = false
@@ -86,7 +86,7 @@ export const store = createStore<RaceState>({
   },
 
   actions: {
-    generateHorses({ commit }) {
+    generateHorses({ commit }: ActionContext<RaceState, RaceState>) {
       const horses: Horse[] = []
 
       for (let i = 0; i < 20; i++) {
@@ -101,7 +101,7 @@ export const store = createStore<RaceState>({
       commit('SET_HORSES', horses)
     },
 
-    generateProgram({ commit, state }) {
+    generateProgram({ commit, state }: ActionContext<RaceState, RaceState>) {
       const rounds: Round[] = []
 
       for (let i = 0; i < 6; i++) {
@@ -113,7 +113,7 @@ export const store = createStore<RaceState>({
 
         rounds.push({
           roundNumber: i + 1,
-          distance: ROUND_DISTANCES[i],
+          distance: ROUND_DISTANCES[i]!,
           horses: horsesWithLanes,
           status: 'pending'
         })
@@ -122,7 +122,7 @@ export const store = createStore<RaceState>({
       commit('SET_PROGRAM', { rounds })
     },
 
-    async startRace({ commit, state, dispatch }) {
+    async startRace({ commit, state, dispatch }: ActionContext<RaceState, RaceState>) {
       if (!state.program) {
         throw new Error('No program generated. Generate program first.')
       }
@@ -140,7 +140,7 @@ export const store = createStore<RaceState>({
       await dispatch('simulateRace', state.currentRoundIndex)
     },
 
-    async simulateRace({ commit, state }, roundIndex: number) {
+    async simulateRace({ commit, state }: ActionContext<RaceState, RaceState>, roundIndex: number) {
       const round = state.program?.rounds[roundIndex]
       if (!round) return
 
@@ -171,13 +171,13 @@ export const store = createStore<RaceState>({
       commit('SET_IS_RACING', false)
     },
 
-    nextRound({ commit, state }) {
+    nextRound({ commit, state }: ActionContext<RaceState, RaceState>) {
       if (state.program && state.currentRoundIndex < state.program.rounds.length - 1) {
         commit('SET_CURRENT_ROUND_INDEX', state.currentRoundIndex + 1)
       }
     },
 
-    resetRace({ commit }) {
+    resetRace({ commit }: ActionContext<RaceState, RaceState>) {
       commit('RESET_RACE')
     }
   }

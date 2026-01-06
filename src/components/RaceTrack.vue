@@ -15,7 +15,7 @@
           :key="horse.id"
           class="lane"
         >
-          <div class="horse-lane-number-box">{{ index + 1 }}</div>
+          <div class="horse-lane-number-box">{{ (index as number) + 1 }}</div>
 
           <div class="road-area">
             <div class="horse-road">
