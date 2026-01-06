@@ -164,7 +164,7 @@ const getAnimationDuration = (horse: Horse) => {
     left: 10px;
   }
   100% {
-    left: calc(100% - 120px);
+    left: calc(100% - 60px);
   }
 }
 

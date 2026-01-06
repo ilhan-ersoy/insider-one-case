@@ -115,9 +115,6 @@ const currentRoundIndex = computed(() => store.getters.getCurrentRoundIndex)
 }
 
 .round-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   margin-bottom: 10px;
 }
 

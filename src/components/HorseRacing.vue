@@ -1,7 +1,7 @@
 <template>
   <div class="horse-racing">
     <div class="header">
-      <h1>Horse Racing</h1>
+      <h1>🏇🏼 Horse Racing 🏇🏼</h1>
       <div class="actions">
         <button @click="handleGenerateProgram" class="button generate">
           GENERATE PROGRAM

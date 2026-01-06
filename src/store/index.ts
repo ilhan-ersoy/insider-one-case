@@ -148,8 +148,8 @@ export const store = createStore<RaceState>({
 
       for (const horse of round.horses) {
         const baseTime = round.distance / 10
-        const conditionFactor = (100 - horse.horse_condition) / 100
-        const randomFactor = Math.random() * 2
+        const conditionFactor = (100 - horse.horse_condition) / 30
+        const randomFactor = Math.random() * 0.8
         const time = baseTime + (baseTime * conditionFactor) + randomFactor
 
         results.push({

@@ -16,33 +16,25 @@
           class="result-section"
         >
           <div class="result-header">
-            <span class="result-round">{{ round.roundNumber }}ST Lap</span>-
-            <span class="result-distance">{{ round.distance }}m</span>
+            <span class="result-round">{{ round.roundNumber }}ST Lap - {{ round.distance }}m </span>
           </div>
 
-          <table class="result-table">
-            <thead>
-              <tr>
-                <th>Position</th>
-                <th>Name</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr
-                v-for="result in round.results"
-                :key="result.horse.id"
-                :class="getPositionClass(result.position)"
-              >
-                <td class="position-cell">
-                  <span class="position-badge">{{ result.position }}</span>
-                </td>
-                <td class="horse-info">
-                  <div class="horse-color" :style="{ backgroundColor: result.horse.horse_color }"></div>
-                  <span class="horse-name-result">{{ result.horse.horse_name }}</span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="round-horses-container">
+            <div class="horses-header">
+              <span>Position</span>
+              <span>Name</span>
+              <span>Color</span>
+            </div>
+            <div
+              v-for="result in round.results"
+              :key="result.horse.id"
+              class="single-horse"
+            >
+              <span class="horse-position">{{ result.position }}</span>
+              <span class="horse-name-chip">{{ result.horse.horse_name }}</span>
+              <div class="horse-color-box" :style="{ backgroundColor: result.horse.horse_color }"></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -56,13 +48,6 @@ import { useStore } from 'vuex'
 const store = useStore()
 
 const completedRounds = computed(() => store.getters.getCompletedRounds)
-
-const getPositionClass = (position: number) => {
-  if (position === 1) return 'first-place'
-  if (position === 2) return 'second-place'
-  if (position === 3) return 'third-place'
-  return ''
-}
 </script>
 
 <style scoped>
@@ -83,7 +68,7 @@ const getPositionClass = (position: number) => {
 
 .results-header h2 {
   margin: 0;
-  font-size: 1.2rem;
+  font-size: 19.2px;
   color: white;
 }
 
@@ -104,131 +89,64 @@ const getPositionClass = (position: number) => {
 .results-list {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 12px;
 }
 
 .result-section {
-  border: 2px solid #ecf0f1;
-  border-radius: 8px;
-  overflow: hidden;
-  animation: slideIn 0.3s ease;
-}
-
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  border: 1px solid black;
+  padding: 10px;
 }
 
 .result-header {
-  color: #000;
-  padding: 10px 15px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  margin-bottom: 10px;
 }
 
 .result-round {
   font-weight: bold;
-  font-size: 1rem;
-}
-
-.result-distance {
-  background-color: #e74c3c;
-  padding: 2px 10px;
-  border-radius: 12px;
-  font-size: 0.85rem;
-}
-
-.result-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.result-table thead {
-  background-color: #ecf0f1;
-}
-
-.result-table th {
-  padding: 10px;
-  text-align: left;
-  font-size: 0.85rem;
-  font-weight: 600;
   color: #2c3e50;
+  font-size: 16px;
 }
 
-.result-table td {
-  padding: 10px;
-  border-bottom: 1px solid #ecf0f1;
-  font-size: 0.85rem;
-}
-
-.position-cell {
-  width: 80px;
-}
-
-.position-badge {
-  display: inline-block;
-  width: 30px;
-  height: 30px;
-  background-color: #95a5a6;
-  color: white;
-  border-radius: 50%;
-  text-align: center;
-  line-height: 30px;
-  font-weight: bold;
-}
-
-.first-place .position-badge {
-  background: linear-gradient(135deg, #ffd700, #ffed4e);
-  color: #2c3e50;
-  box-shadow: 0 2px 8px rgba(255, 215, 0, 0.5);
-}
-
-.second-place .position-badge {
-  background: linear-gradient(135deg, #c0c0c0, #e8e8e8);
-  color: #2c3e50;
-  box-shadow: 0 2px 8px rgba(192, 192, 192, 0.5);
-}
-
-.third-place .position-badge {
-  background: linear-gradient(135deg, #cd7f32, #e8a87c);
-  color: white;
-  box-shadow: 0 2px 8px rgba(205, 127, 50, 0.5);
-}
-
-.horse-info {
+.round-horses-container {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+}
+
+.horses-header {
+  display: grid;
+  grid-template-columns: 60px 1fr 60px;
   gap: 10px;
-}
-
-.horse-color {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  border: 2px solid #ecf0f1;
-}
-
-.horse-name-result {
-  font-weight: 600;
+  align-items: center;
+  font-size: 14px;
+  font-weight: bold;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #ecf0f1;
+  margin-bottom: 8px;
   color: #2c3e50;
 }
 
-.first-place {
-  background-color: #fff9e6;
+.single-horse {
+  display: grid;
+  grid-template-columns: 60px 1fr 60px;
+  gap: 10px;
+  align-items: center;
+  font-size: 14px;
+  padding: 4px 0;
 }
 
-.second-place {
-  background-color: #f8f9fa;
+.horse-position {
+  color: #7f8c8d;
+  font-weight: 600;
+  text-align: center;
 }
 
-.third-place {
-  background-color: #fef5e7;
+.horse-name-chip {
+  color: #34495e;
+  font-weight: 500;
+}
+
+.horse-color-box {
+  width: 30px;
+  height: 20px;
 }
 </style>
