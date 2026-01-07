@@ -51,10 +51,11 @@ const store = useStore()
 const currentRound = computed(() => store.getters.getCurrentRound)
 
 const getAnimationDuration = (horse: Horse) => {
-  const baseDuration = 3
+  const baseTime = 3
   const conditionFactor = (100 - horse.horse_condition) / 100
   const randomFactor = Math.random() * 0.3
-  return baseDuration + conditionFactor + randomFactor
+  const time = baseTime + (baseTime * conditionFactor) + (randomFactor * 0.1)
+  return time
 }
 </script>
 
@@ -149,9 +150,6 @@ const getAnimationDuration = (horse: Horse) => {
   left: 10px;
   top: 50%;
   transform: translateY(-50%);
-  display: flex;
-  align-items: center;
-  gap: 8px;
   z-index: 10;
 }
 

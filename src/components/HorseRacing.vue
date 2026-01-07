@@ -166,6 +166,7 @@ watch(currentRoundIndex, (newIndex) => {
   overflow: hidden;
   display: flex;
   flex-direction: row;
+  height: 830px;
 }
 
 .right-part {
