@@ -50,7 +50,7 @@
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 import type { Horse } from '@/types'
-import HorseIcon from './HorseIcon.vue'
+import HorseIcon from '../HorseIcon/HorseIcon.vue'
 
 const store = useStore()
 

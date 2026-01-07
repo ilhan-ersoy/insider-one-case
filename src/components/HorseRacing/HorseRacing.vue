@@ -37,10 +37,10 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue'
 import { useStore } from 'vuex'
-import HorseList from './HorseList.vue'
-import RaceTrack from './RaceTrack.vue'
-import RaceProgram from './RaceProgram.vue'
-import RaceResults from './RaceResults.vue'
+import HorseList from '../HorseList/HorseList.vue'
+import RaceTrack from '../RaceTrack/RaceTrack.vue'
+import RaceProgram from '../RaceProgram/RaceProgram.vue'
+import RaceResults from '../RaceResults/RaceResults.vue'
 
 const store = useStore()
 
