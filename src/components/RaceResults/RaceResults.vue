@@ -68,7 +68,7 @@ const completedRounds = computed(() => store.getters.getCompletedRounds)
 
 .results-header h2 {
   margin: 0;
-  font-size: 19.2px;
+  font-size: 19px;
   color: white;
 }
 
@@ -148,5 +148,64 @@ const completedRounds = computed(() => store.getters.getCompletedRounds)
 .horse-color-box {
   width: 30px;
   height: 20px;
+}
+
+@media (max-width: 768px) {
+  .results-header h2 {
+    font-size: 16px;
+  }
+
+  .results-content {
+    padding: 12px;
+  }
+
+  .result-round {
+    font-size: 14px;
+  }
+
+  .horses-header,
+  .single-horse {
+    grid-template-columns: 50px 1fr 50px;
+    font-size: 12px;
+  }
+
+  .horse-color-box {
+    width: 25px;
+    height: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .results-header {
+    padding: 12px;
+  }
+
+  .results-header h2 {
+    font-size: 14px;
+  }
+
+  .results-content {
+    padding: 10px;
+  }
+
+  .result-section {
+    padding: 8px;
+  }
+
+  .result-round {
+    font-size: 14px;
+  }
+
+  .horses-header,
+  .single-horse {
+    grid-template-columns: 40px 1fr 40px;
+    font-size: 11px;
+    gap: 5px;
+  }
+
+  .horse-color-box {
+    width: 20px;
+    height: 15px;
+  }
 }
 </style>

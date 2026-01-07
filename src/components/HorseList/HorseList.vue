@@ -58,7 +58,7 @@ const horses = computed(() => store.getters.getAllHorses)
 
 .horse-list-header h2 {
   margin: 0;
-  font-size: 1.2rem;
+  font-size: 18px;
   color: #2c3e50;
 }
 
@@ -77,8 +77,8 @@ th {
   background-color: #ecf0f1;
   padding: 10px 5px;
   text-align: left;
-  font-size: 0.9rem;
-font-weight: 600;
+  font-size: 14px;
+  font-weight: 600;
   position: sticky;
   top: 0;
   z-index: 1;
@@ -87,12 +87,66 @@ font-weight: 600;
 td {
   padding: 8px 5px;
   border-bottom: 1px solid #ecf0f1;
-  font-size: 0.85rem;
+  font-size: 13px;
 }
 
 .color-box {
   width: 30px;
   height: 30px;
   margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .horse-list-header h2 {
+    font-size: 16px;
+  }
+
+  .horse-list-content {
+    padding: 8px;
+  }
+
+  th {
+    padding: 8px 4px;
+    font-size: 13px;
+  }
+
+  td {
+    padding: 6px 4px;
+    font-size: 12px;
+  }
+
+  .color-box {
+    width: 25px;
+    height: 25px;
+  }
+}
+
+@media (max-width: 480px) {
+  .horse-list-header {
+    padding: 12px;
+  }
+
+  .horse-list-header h2 {
+    font-size: 14px;
+  }
+
+  .horse-list-content {
+    padding: 6px;
+  }
+
+  th {
+    padding: 6px 3px;
+    font-size: 12px;
+  }
+
+  td {
+    padding: 5px 3px;
+    font-size: 11px;
+  }
+
+  .color-box {
+    width: 20px;
+    height: 20px;
+  }
 }
 </style>

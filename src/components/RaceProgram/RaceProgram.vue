@@ -68,7 +68,7 @@ const currentRoundIndex = computed(() => store.getters.getCurrentRoundIndex)
 
 .program-header h2 {
   margin: 0;
-  font-size: 1.2rem;
+  font-size: 19px;
   color: white;
 }
 
@@ -121,7 +121,7 @@ const currentRoundIndex = computed(() => store.getters.getCurrentRoundIndex)
 .round-number {
   font-weight: bold;
   color: #2c3e50;
-  font-size: 1rem;
+  font-size: 16px;
 }
 
 .round-horses-container {
@@ -160,5 +160,64 @@ const currentRoundIndex = computed(() => store.getters.getCurrentRoundIndex)
 .horse-name-chip {
   color: #34495e;
   font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .program-header h2 {
+    font-size: 16px;
+  }
+
+  .program-content {
+    padding: 12px;
+  }
+
+  .round-number {
+    font-size: 14px;
+  }
+
+  .horses-header,
+  .single-horse {
+    grid-template-columns: 50px 1fr 50px;
+    font-size: 12px;
+  }
+
+  .horse-color-box {
+    width: 25px;
+    height: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .program-header {
+    padding: 12px;
+  }
+
+  .program-header h2 {
+    font-size: 14px;
+  }
+
+  .program-content {
+    padding: 10px;
+  }
+
+  .program-item {
+    padding: 8px;
+  }
+
+  .round-number {
+    font-size: 14px;
+  }
+
+  .horses-header,
+  .single-horse {
+    grid-template-columns: 40px 1fr 40px;
+    font-size: 11px;
+    gap: 5px;
+  }
+
+  .horse-color-box {
+    width: 20px;
+    height: 15px;
+  }
 }
 </style>

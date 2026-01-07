@@ -1,6 +1,6 @@
-# Horse Racing Simulator
+# Horse Racing Simulator 🏇🏼
 
-A simple horse racing simulation built with Vue 3 and TypeScript. Watch horses compete in 6 different laps with varying distances.
+A simple horse racing simulation built with Vue 3 and TypeScript. Watch horses compete in 6 different laps with varying distances. 🏇🏼
 
 ## Features
 
@@ -74,18 +74,18 @@ npm run test:e2e:open
 ```
 src/
 ├── components/
-│   ├── HorseRacing.vue    # Main container
-│   ├── HorseList.vue      # Horse roster display
-│   ├── RaceTrack.vue      # Race animation view
-│   ├── RaceProgram.vue    # Upcoming races
-│   └── RaceResults.vue    # Completed race results
+│   ├── HorseRacing.vue
+│   ├── HorseList.vue
+│   ├── RaceTrack.vue
+│   ├── RaceProgram.vue
+│   └── RaceResults.vue
 ├── store/
-│   └── index.ts           # Vuex state management
+│   └── index.ts
 └── types/
-    └── index.ts           # TypeScript definitions
+    └── index.ts
 cypress/
 └── e2e/
-    └── race-flow.cy.ts    # E2E tests for race flow
+    └── race-flow.cy.ts
 ```
 
 ## Race Mechanics
@@ -104,7 +104,7 @@ The project includes comprehensive E2E tests using Cypress:
 
 ### Test Coverage
 
-- **Full race flow**: Program generation, race start, and results verification
+- **Full race flow**: Program generation - race start - results verification
 - **UI validation**: Horse information display (name, condition, color)
 - **Results validation**: Placement order and finish times
 - **Button states**: Disabled states during race execution
@@ -113,6 +113,6 @@ The project includes comprehensive E2E tests using Cypress:
 ### Running Tests
 
 ```bash
-npm run test:e2e          # Run tests in headless mode
-npm run test:e2e:open     # Open Cypress Test Runner UI
+npm run test:e2e
+npm run test:e2e:open
 ```

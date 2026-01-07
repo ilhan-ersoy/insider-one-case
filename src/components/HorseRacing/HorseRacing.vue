@@ -123,7 +123,7 @@ watch(currentRoundIndex, (newIndex) => {
 
 .header h1 {
   margin: 0;
-  font-size: 2rem;
+  font-size: 32px;
 }
 
 .actions {
@@ -183,15 +183,118 @@ watch(currentRoundIndex, (newIndex) => {
   gap: 20px;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1400px) {
+  .content {
+    grid-template-columns: 20% 80%;
+    grid-template-rows: auto auto;
+  }
+
+  .left-part {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    height: auto;
+    max-height: 400px;
+  }
+
+  .middle-part {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    height: auto;
+    max-height: 400px;
+  }
+
+  .right-part {
+    grid-column: 1 / 3;
+    grid-row: 2 / 3;
+    height: auto;
+  }
+}
+
+@media (max-width: 1024px) {
   .content {
     grid-template-columns: 1fr;
+    grid-template-rows: auto;
     height: auto;
+    padding: 20px;
+  }
+
+  .header {
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+  }
+
+  .header h1 {
+    font-size: 24px;
   }
 
   .left-part,
+  .middle-part,
+  .right-part {
+    grid-column: 1;
+    height: auto;
+    max-height: 500px;
+  }
+
+  .right-part {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 768px) {
+  .content {
+    padding: 15px;
+    gap: 15px;
+  }
+
+  .header {
+    margin-top: 15px;
+  }
+
+  .header h1 {
+    font-size: 19px;
+  }
+
+  .button {
+    padding: 10px 20px;
+    font-size: 12px;
+  }
+
+  .left-part,
+  .middle-part,
   .right-part {
     max-height: 400px;
+  }
+}
+
+@media (max-width: 480px) {
+  .content {
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .header {
+    margin-top: 10px;
+  }
+
+  .header h1 {
+    font-size: 16px;
+  }
+
+  .actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .button {
+    width: 100%;
+    padding: 12px;
+  }
+
+  .left-part,
+  .middle-part,
+  .right-part {
+    max-height: 350px;
   }
 }
 </style>

@@ -78,7 +78,7 @@ const getAnimationDuration = (horse: Horse) => {
   align-items: center;
   justify-content: center;
   height: 100%;
-  font-size: 1.5rem;
+  font-size: 24px;
   color: #7f8c8d;
 }
 
@@ -86,7 +86,8 @@ const getAnimationDuration = (horse: Horse) => {
   padding: 20px;
   height: 100%;
   display: flex;
-  width: 700px;
+  width: 100%;
+  max-width: 700px;
   flex-direction: column;
 }
 
@@ -104,7 +105,7 @@ const getAnimationDuration = (horse: Horse) => {
 .track-info h3 {
   margin: 0;
   color: #2c3e50;
-  font-size: 1.3rem;
+  font-size: 21px;
 }
 
 .track-lanes {
@@ -194,6 +195,72 @@ const getAnimationDuration = (horse: Horse) => {
   }
   75% {
     transform: translateY(3px) rotate(2deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .track-container {
+    padding: 15px;
+  }
+
+  .track-info {
+    padding: 12px;
+  }
+
+  .track-info h3 {
+    font-size: 18px;
+  }
+
+  .lane {
+    min-height: 60px;
+  }
+
+  .road-area {
+    height: 60px;
+  }
+
+  .horse-lane-number-box {
+    width: 35px;
+    font-size: 14px;
+  }
+
+  .horse-icon {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .track-container {
+    padding: 10px;
+  }
+
+  .track-info {
+    padding: 10px;
+  }
+
+  .track-info h3 {
+    font-size: 16px;
+  }
+
+  .lane {
+    min-height: 50px;
+  }
+
+  .road-area {
+    height: 50px;
+  }
+
+  .horse-lane-number-box {
+    width: 30px;
+    font-size: 12px;
+  }
+
+  .horse-icon {
+    font-size: 32px;
+  }
+
+  .no-race {
+    font-size: 19px;
   }
 }
 </style>
