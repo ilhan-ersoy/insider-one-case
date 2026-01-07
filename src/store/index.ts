@@ -145,12 +145,17 @@ export const store = createStore<RaceState>({
       if (!round) return
 
       const results: RaceResult[] = []
+      let maxTime = 0
 
       for (const horse of round.horses) {
-        const baseTime = round.distance / 10
-        const conditionFactor = (100 - horse.horse_condition) / 30
-        const randomFactor = Math.random() * 0.8
-        const time = baseTime + (baseTime * conditionFactor) + randomFactor
+        const baseTime = 3
+        const conditionFactor = (100 - horse.horse_condition) / 100
+        const randomFactor = Math.random() * 0.3
+        const time = baseTime + (baseTime * conditionFactor) + (randomFactor * 0.1)
+
+        if (time > maxTime) {
+          maxTime = time
+        }
 
         results.push({
           position: 0,
@@ -164,7 +169,7 @@ export const store = createStore<RaceState>({
         result.position = index + 1
       })
 
-      await new Promise(resolve => setTimeout(resolve, 3000))
+      await new Promise(resolve => setTimeout(resolve, maxTime * 1000))
 
       commit('SET_ROUND_RESULTS', { roundIndex, results })
       commit('SET_ROUND_STATUS', { roundIndex, status: 'completed' })
