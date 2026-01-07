@@ -29,7 +29,13 @@
                 animationDelay: '0s'
               }"
             >
-              <div class="horse-icon">
+              <div
+                class="horse-icon"
+                :style="{
+                  animationDuration: '0.3s',
+                  animationIterationCount: currentRound.status === 'running' ? Math.ceil(getAnimationDuration(horse) / 0.3) : 0
+                }"
+              >
                 <HorseIcon :fill="horse.horse_color" width="48" height="48" />
               </div>
             </div>
@@ -175,7 +181,7 @@ const getAnimationDuration = (horse: Horse) => {
 }
 
 .horse-runner.running .horse-icon {
-  animation: gallop 0.3s infinite;
+  animation: gallop 0.3s;
 }
 
 @keyframes gallop {

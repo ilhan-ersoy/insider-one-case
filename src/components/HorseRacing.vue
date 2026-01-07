@@ -7,12 +7,12 @@
           GENERATE PROGRAM
         </button>
         <button
-          :disabled="!canStartRace || isRacing"
+          :disabled="!canStartRace || hasStarted"
           @click="handleStart"
           class="button start"
-          :style="{ pointerEvents: isRacing ? 'none' : 'auto' }"
+          :style="{ pointerEvents: hasStarted ? 'none' : 'auto' }"
         >
-          START
+          {{ hasStarted ? 'STARTED' : 'START' }}
         </button>
       </div>
     </div>
@@ -52,6 +52,7 @@ const canStartRace = computed(() => {
   return program.value !== null && !isRacing.value && currentRoundIndex.value < 6
 })
 
+const hasStarted = ref(false)
 const raceTimeout = ref<number | null>(null)
 
 onMounted(() => {
@@ -59,11 +60,13 @@ onMounted(() => {
 })
 
 const handleGenerateProgram = () => {
+  hasStarted.value = false
   store.dispatch('generateProgram')
 }
 
 const handleStart = async () => {
-  if (!isRacing.value) {
+  if (!isRacing.value && !hasStarted.value) {
+    hasStarted.value = true
     runNextRound()
   }
 }
@@ -105,16 +108,17 @@ watch(currentRoundIndex, (newIndex) => {
   width: 100%;
   margin: 0 auto;
   max-width: 1800px;
+
 }
 
 .header {
   display: flex;
-    flex-direction: column;
-    gap: 30px;
-    align-items: center;
-  margin-bottom: 20px;
-  padding: 20px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   color: #000;
+  gap: 20px;
+  margin-top: 30px;
 }
 
 .header h1 {
