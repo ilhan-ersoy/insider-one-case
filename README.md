@@ -2,6 +2,10 @@
 
 A simple horse racing simulation built with Vue 3 and TypeScript. Watch horses compete in 6 different laps with varying distances. 🏇🏼
 
+## Live Demo
+
+The application is deployed and live at: **[https://insider-one-case.vercel.app/](https://insider-one-case.vercel.app/)**
+
 ## Features
 
 - Generate random racing programs with 6 laps
